@@ -1,0 +1,117 @@
+---
+title: "Tier-1 Solar Farm"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+# install.packages("readr")
+# install.packages("rgdal")
+# install.packages("dplyr")
+
+library(readr)
+library(rgdal)
+library(dplyr)
+```
+
+## Gather NDVI values of the 7 Tier-1 Solar edge (10-40 meter buffer) from CSV
+```{r}
+# Import Tier-1 edge data
+Pre_Construction_Jan_Apr_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Pre-Construction Jan-Apr NDVI.csv")
+Pre_Construction_May_Aug_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Pre-Construction May-Aug NDVI.csv")
+Pre_Construction_Sep_Dec_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Pre-Construction Sep-Dec NDVI.csv")
+Post_Construction_Jan_Apr_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Post-Construction Jan-Apr NDVI.csv")
+Post_Construction_May_Aug_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Post-Construction May-Aug NDVI.csv")
+Post_Construction_Sep_Dec_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Post-Construction Sep-Dec NDVI.csv")
+
+
+# Import control (30 random grassfields) data
+Pre_Construction_Jan_Apr_NDVI_control <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Pre-Construction Jan-Apr NDVI Control.csv")
+Pre_Construction_May_Aug_NDVI_control <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Pre-Construction May-Aug NDVI Control.csv")
+Pre_Construction_Sep_Dec_NDVI_control <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Pre-Construction Sep-Dec NDVI Control.csv")
+Post_Construction_Jan_Apr_NDVI_control <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Post-Construction Jan-Apr NDVI Control.csv")
+Post_Construction_May_Aug_NDVI_control <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Post-Construction May-Aug NDVI Control.csv")
+Post_Construction_Sep_Dec_NDVI_control <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/Post-Construction Sep-Dec NDVI Control.csv")
+```
+# Pull NDVI means as vectors from CSV
+```{r}
+# Tier-1 edge data
+Pre_Construction_Jan_Apr_NDVI_mean <- pull(Pre_Construction_Jan_Apr_NDVI, name = NDVI_mean)
+Post_Construction_Jan_Apr_NDVI_mean <- pull(Post_Construction_Jan_Apr_NDVI, name = NDVI_mean)
+Pre_Construction_May_Aug_NDVI_mean <- pull(Pre_Construction_May_Aug_NDVI, name = NDVI_mean)
+Post_Construction_May_Aug_NDVI_mean <- pull(Post_Construction_May_Aug_NDVI, name = NDVI_mean)
+Pre_Construction_Sep_Dec_NDVI_mean <- pull(Pre_Construction_Sep_Dec_NDVI, name = NDVI_mean)
+Post_Construction_Sep_Dec_NDVI_mean <- pull(Post_Construction_Sep_Dec_NDVI, name = NDVI_mean)
+
+# Control (30 random grassland) data
+Pre_Construction_Jan_Apr_NDVI_mean_control <- pull(Pre_Construction_Jan_Apr_NDVI_control, name = NDVI_mean)
+Post_Construction_Jan_Apr_NDVI_mean_control <- pull(Post_Construction_Jan_Apr_NDVI_control, name = NDVI_mean)
+Pre_Construction_May_Aug_NDVI_mean_control <- pull(Pre_Construction_May_Aug_NDVI_control, name = NDVI_mean)
+Post_Construction_May_Aug_NDVI_mean_control <- pull(Post_Construction_May_Aug_NDVI_control, name = NDVI_mean)
+Pre_Construction_Sep_Dec_NDVI_mean_control <- pull(Pre_Construction_Sep_Dec_NDVI_control, name = NDVI_mean)
+Post_Construction_Sep_Dec_NDVI_mean_control <- pull(Post_Construction_Sep_Dec_NDVI_control, name = NDVI_mean)
+```
+
+# Perform Paired t-test
+```{r}
+# Perform paired t-test
+t_test_Jan_Apr <- t.test(Pre_Construction_Jan_Apr_NDVI_mean, Post_Construction_Jan_Apr_NDVI_mean, paired=TRUE)
+t_test_May_Aug <- t.test(Pre_Construction_May_Aug_NDVI_mean, Post_Construction_May_Aug_NDVI_mean, paired=TRUE)
+t_test_Sep_Dec <- t.test(Pre_Construction_Sep_Dec_NDVI_mean, Post_Construction_Sep_Dec_NDVI_mean, paired=TRUE)
+
+t_test_Jan_Apr_control <- t.test(Pre_Construction_Jan_Apr_NDVI_mean_control, Post_Construction_Jan_Apr_NDVI_mean_control, paired=TRUE)
+t_test_May_Aug_control <- t.test(Pre_Construction_May_Aug_NDVI_mean_control, Post_Construction_May_Aug_NDVI_mean_control, paired=TRUE)
+t_test_Sep_Dec_control <- t.test(Pre_Construction_Sep_Dec_NDVI_mean_control, Post_Construction_Sep_Dec_NDVI_mean_control, paired=TRUE)
+
+# Print the result
+print(t_test_Jan_Apr)
+print(t_test_May_Aug)
+print(t_test_Sep_Dec)
+
+print(t_test_Jan_Apr_control)
+print(t_test_May_Aug_control)
+print(t_test_Sep_Dec_control)
+```
+
+
+# Display Results - Box Plot
+```{r}
+
+# Create a box plot - Tier-1 edge
+boxplot(Pre_Construction_Jan_Apr_NDVI_mean, Post_Construction_Jan_Apr_NDVI_mean, xlab = "Jan-Apr NDVI per collection", col = c("blue", "orange"))
+
+legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI"), fill = c("blue", "orange"))
+
+
+boxplot(Pre_Construction_May_Aug_NDVI_mean, Post_Construction_May_Aug_NDVI_mean, xlab = "May-Aug NDVI per collection", col = c("blue", "orange"))
+
+legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI"), fill = c("blue", "orange"))
+
+
+
+boxplot(Pre_Construction_Sep_Dec_NDVI_mean, Post_Construction_Sep_Dec_NDVI_mean, xlab = "Sep-Dec NDVI per collection", col = c("blue", "orange"))
+
+legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI"), fill = c("blue", "orange"))
+
+
+
+
+
+# Create a box plot - Control (30 random grassfields)
+boxplot(Pre_Construction_Jan_Apr_NDVI_mean_control, Post_Construction_Jan_Apr_NDVI_mean_control, xlab = "Jan-Apr NDVI control", col = c("blue", "orange"))
+
+legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI"), fill = c("blue", "orange"))
+
+
+boxplot(Pre_Construction_May_Aug_NDVI_mean_control, Post_Construction_May_Aug_NDVI_mean_control, xlab = "May-Aug NDVI control", col = c("blue", "orange"))
+
+legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI"), fill = c("blue", "orange"))
+
+
+
+boxplot(Pre_Construction_Sep_Dec_NDVI_mean_control, Post_Construction_Sep_Dec_NDVI_mean_control, xlab = "Sep-Dec NDVI control", col = c("blue", "orange"))
+
+legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI"), fill = c("blue", "orange"))
+```
