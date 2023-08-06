@@ -10,10 +10,14 @@ knitr::opts_chunk$set(echo = TRUE)
 # install.packages("readr")
 # install.packages("rgdal")
 # install.packages("dplyr")
+# install.packages("tidyverse")
+# install.packages("ggpubr")
 
 library(readr)
 library(rgdal)
 library(dplyr)
+library(tidyverse)
+library(ggpubr)
 ```
 
 ## Gather NDVI values of the 7 Tier-1 Solar edge (10-40 meter buffer) from CSV
@@ -114,4 +118,18 @@ legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI")
 boxplot(Pre_Construction_Sep_Dec_NDVI_mean_control, Post_Construction_Sep_Dec_NDVI_mean_control, xlab = "Sep-Dec NDVI control", col = c("blue", "orange"))
 
 legend("topright", legend = c("Pre-Construction NDVI", "Post-Construction NDVI"), fill = c("blue", "orange"))
+```
+
+# Display Results - Linear Regression Graph
+```{r}
+
+# Pull NDVI per 4-month period from CSV
+Jan_Apr_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/All Jan-Apr NDVI.csv")
+May_Aug_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/All May-Aug NDVI.csv")
+Sep_Dec_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/All Sep-Dec NDVI.csv")
+
+# Create linear regression graph
+ggplot(data = Jan_Apr_NDVI) + geom_point(mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, shape = Status), size = 2.5) + geom_smooth(method = glm, mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, linetype = Status)) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "January - April NDVI")
+ggplot(data = May_Aug_NDVI) + geom_point(mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, shape = Status), size = 2.5) + geom_smooth(method = glm, mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, linetype = Status)) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "May - August NDVI")
+ggplot(data = Sep_Dec_NDVI) + geom_point(mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, shape = Status), size = 2.5) + geom_smooth(method = glm, mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, linetype = Status)) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "September - December NDVI")
 ```
