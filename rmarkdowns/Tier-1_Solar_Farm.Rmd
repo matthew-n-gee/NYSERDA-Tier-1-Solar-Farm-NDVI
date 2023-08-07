@@ -11,12 +11,14 @@ knitr::opts_chunk$set(echo = TRUE)
 # install.packages("rgdal")
 # install.packages("dplyr")
 # install.packages("tidyverse")
+# install.packages("ggplot2")
 # install.packages("ggpubr")
 
 library(readr)
 library(rgdal)
 library(dplyr)
 library(tidyverse)
+library(ggplot2)
 library(ggpubr)
 ```
 
@@ -79,7 +81,6 @@ print(t_test_May_Aug_control)
 print(t_test_Sep_Dec_control)
 ```
 
-
 # Display Results - Box Plot
 ```{r}
 
@@ -128,8 +129,26 @@ Jan_Apr_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/All Ja
 May_Aug_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/All May-Aug NDVI.csv")
 Sep_Dec_NDVI <- read_csv("~/GitHub/NYSERDA-Tier-1-Solar-Farm-NDVI/results/All Sep-Dec NDVI.csv")
 
+
 # Create linear regression graph
-ggplot(data = Jan_Apr_NDVI) + geom_point(mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, shape = Status), size = 2.5) + geom_smooth(method = glm, mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, linetype = Status)) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "January - April NDVI")
-ggplot(data = May_Aug_NDVI) + geom_point(mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, shape = Status), size = 2.5) + geom_smooth(method = glm, mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, linetype = Status)) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "May - August NDVI")
-ggplot(data = Sep_Dec_NDVI) + geom_point(mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, shape = Status), size = 2.5) + geom_smooth(method = glm, mapping = aes(x = NDVI_mean_control, y = NDVI_mean, color = Status, linetype = Status)) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "September - December NDVI")
+## Jan-Apr graph
+x <- Jan_Apr_NDVI$NDVI_mean_control
+y <- Jan_Apr_NDVI$NDVI_mean
+
+formula <- y ~ x
+
+ggplot(Jan_Apr_NDVI, aes(NDVI_mean_control, NDVI_mean, color = Status)) + geom_point(mapping = aes(shape = Status), size = 3) + geom_smooth(aes(fill = Status, color = Status, linetype = Status), method = lm, formula = formula) + stat_regline_equation(label.x = c(0.05,0.05), label.y = c(0.5,0.55), aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")), formula = formula, size = 4) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "January - April NDVI") + guides(fill = guide_legend(override.aes = aes(label = "")))
+
+
+## May-Aug graph
+x <- May_Aug_NDVI$NDVI_mean_control
+y <- May_Aug_NDVI$NDVI_mean
+
+ggplot(May_Aug_NDVI, aes(NDVI_mean_control, NDVI_mean, color = Status)) + geom_point(mapping = aes(shape = Status), size = 3) + geom_smooth(aes(fill = Status, color = Status, linetype = Status), method = lm, formula = formula) + stat_regline_equation(label.x = c(0.45,0.45), label.y = c(0.82,0.85), aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")), formula = formula, size = 4) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "May - August NDVI") + guides(fill = guide_legend(override.aes = aes(label = "")))
+
+## Sep-Dec graph
+x <- Sep_Dec_NDVI$NDVI_mean_control
+y <- Sep_Dec_NDVI$NDVI_mean
+
+ggplot(Sep_Dec_NDVI, aes(NDVI_mean_control, NDVI_mean, color = Status)) + geom_point(mapping = aes(shape = Status), size = 3) + geom_smooth(aes(fill = Status, color = Status, linetype = Status), method = lm, formula = formula) + stat_regline_equation(label.x = c(0.59,0.59), label.y = c(0.28,0.33), aes(label =  paste(..eq.label.., ..rr.label.., sep = "~~~~")), formula = formula, size = 4) + labs(x = "NDVI for Control Vegetation", y = "NDVI for Tier-1 Solar", title = "September - December NDVI") + guides(fill = guide_legend(override.aes = aes(label = "")))
 ```
