@@ -1,0 +1,11 @@
+fid,Name,descriptio,timestamp,begin,end,altitudeMo,tessellate,extrude,visibility,drawOrder,icon,layer,path,ringId,distance,NDVI_mean,NDVI_stdev,NDVI_variance
+"2",stillwater_1,,,,,,1,0,-1,,,stillwater_1,/Users/matthewgee/Desktop/solar shapefiles/stillwater_1.shp,"2",20,0.147466511457127,0.0522194595997016,0.00272687196088487
+"6",stillwater_2,,,,,,1,0,-1,,,stillwater_2,/Users/matthewgee/Desktop/solar shapefiles/stillwater_2.shp,"2",20,0.193778022812464,0.0779093666909207,0.00606986941818035
+"10",stillwater_3,,,,,,1,0,-1,,,stillwater_3,/Users/matthewgee/Desktop/solar shapefiles/stillwater_3.shp,"2",20,0.210123515538049,0.104569282127065,0.0109347347645696
+"14",stillwater_5,,,,,,1,0,-1,,,stillwater_5,/Users/matthewgee/Desktop/solar shapefiles/stillwater_5.shp,"2",20,0.224302323176353,0.103952412835013,0.010806104134221
+"18",stillwater_6,,,,,,1,0,-1,,,stillwater_6,/Users/matthewgee/Desktop/solar shapefiles/stillwater_6.shp,"2",20,0.196358218223655,0.055960880672549,0.00313162016564726
+"22",stillwater_7,,,,,,1,0,-1,,,stillwater_7,/Users/matthewgee/Desktop/solar shapefiles/stillwater_7.shp,"2",20,0.194804253514137,0.113732133326133,0.0129349981509133
+"26",stillwater_8,,,,,,1,0,-1,,,stillwater_8,/Users/matthewgee/Desktop/solar shapefiles/stillwater_8.shp,"2",20,0.203892349894358,0.122222748226909,0.0149384001841384
+"30",stillwater_9,,,,,,1,0,-1,,,stillwater_9,/Users/matthewgee/Desktop/solar shapefiles/stillwater_9.shp,"2",20,0.175662533071199,0.0610892921299463,0.00373190161293792
+"34",stillwater_10,,,,,,1,0,-1,,,stillwater_10,/Users/matthewgee/Desktop/solar shapefiles/stillwater_10.shp,"2",20,0.173028867001394,0.0599791177812511,0.00359749456981719
+"38",stillwater_11,,,,,,1,0,-1,,,stillwater_11,/Users/matthewgee/Desktop/solar shapefiles/stillwater_11.shp,"2",20,0.208253531200609,0.0615230982015189,0.00378509161231374

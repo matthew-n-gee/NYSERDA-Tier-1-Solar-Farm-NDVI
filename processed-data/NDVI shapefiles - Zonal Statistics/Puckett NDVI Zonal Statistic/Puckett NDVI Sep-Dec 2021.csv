@@ -1,0 +1,6 @@
+fid,Name,descriptio,timestamp,begin,end,altitudeMo,tessellate,extrude,visibility,drawOrder,icon,layer,path,ringId,distance,NDVI_mean,NDVI_stdev,NDVI_variance
+"2",puckett_solar_1,,,,,,1,0,-1,,,puckett_solar_1,/Users/matthewgee/Desktop/puckett/puckett_solar_1.shp,"2",20,0.474552311849149,0.16657322460349,0.0277466391548047
+"6",puckett_solar_3,,,,,,1,0,-1,,,puckett_solar_3,/Users/matthewgee/Desktop/puckett/puckett_solar_3.shp,"2",20,0.432214721721947,0.0944813763593109,0.00892673047874976
+"10",puckett_solar_4,,,,,,1,0,-1,,,puckett_solar_4,/Users/matthewgee/Desktop/puckett/puckett_solar_4.shp,"2",20,0.523666336828349,0.18755967101758,0.0351786301922227
+"14",puckett_solar_5,,,,,,1,0,-1,,,puckett_solar_5,/Users/matthewgee/Desktop/puckett/puckett_solar_5.shp,"2",20,0.626958632282077,0.136912527298706,0.018745040131319
+"18",puckett_solar_6,,,,,,1,0,-1,,,puckett_solar_6,/Users/matthewgee/Desktop/puckett/puckett_solar_6.shp,"2",20,0.644443696309746,0.10947336917971,0.0119844185595571
