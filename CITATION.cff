@@ -1,0 +1,29 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: NYSERDA Tier-1 Solar Farm NDVI
+message: >-
+  If you use this dataset, please cite it using the metadata
+  from this file.
+type: dataset
+authors:
+  - given-names: Matthew
+    family-names: Gee
+    email: mngee02@gmail.com
+repository-code: >-
+  https://github.com/matthew-n-gee/NYSERDA-Tier-1-Solar-Farm-NDVI.git
+abstract: >-
+  NDVI Paired t-test and linear regression on NYSERDA Tier-1
+  Solar Farm Pre- & Post-Construction. Visualizes paired
+  t-test on the Normalized Difference Vegetation Index
+  (NDVI) of Pre-Construction and Post-Construction of
+  NYSERDA Tier-1 Solar Farm. A control variable of 29
+  randomly-sampled grass and other vegetation fields are
+  included.
+keywords:
+  - NDVI
+  - GIS
+  - Solar
+  - NYSERDA
+date-released: '2023-08-08'
